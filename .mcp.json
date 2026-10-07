@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "follore": {
+      "type": "http",
+      "url": "https://follore.com/mcp"
+    }
+  }
+}

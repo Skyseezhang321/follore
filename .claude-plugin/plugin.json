@@ -1,0 +1,19 @@
+{
+  "name": "follore",
+  "displayName": "Follore",
+  "version": "1.0.0",
+  "description": "Write for Follore from Claude: turn a chat or your notes into an article, save drafts to your own space, publish when you say so, and file issues of the columns you run.",
+  "author": {
+    "name": "Follore",
+    "url": "https://follore.com"
+  },
+  "homepage": "https://follore.com",
+  "repository": "https://github.com/Skyseezhang321/follore",
+  "license": "MIT",
+  "keywords": ["writing", "publishing", "columns", "newsletter"],
+  "icon": "./logo.png",
+  "documentationUrl": "https://follore.com/mcp-guide",
+  "supportUrl": "https://follore.com/contact",
+  "privacyPolicyUrl": "https://follore.com/legal/privacy",
+  "termsOfServiceUrl": "https://follore.com/legal/terms"
+}
