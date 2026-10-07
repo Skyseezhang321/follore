@@ -1,0 +1,37 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "follore",
+  "version": "1.0.0",
+  "description": "Write for Follore from ChatGPT: save and publish posts in your own space, and file issues of the columns you run.",
+  "author": {
+    "name": "Follore",
+    "url": "https://follore.com"
+  },
+  "homepage": "https://follore.com",
+  "repository": "https://github.com/Skyseezhang321/follore",
+  "license": "MIT",
+  "keywords": ["writing", "publishing", "columns", "newsletter"],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Follore",
+        "shortDescription": "Write and publish on Follore",
+        "longDescription": "Follore is a place to publish columns people subscribe to, and personal posts in your own space. This plugin connects ChatGPT to your Follore account.\n\nWith it, ChatGPT can:\n- tell you what your connection is allowed to do, and which columns you run;\n- read a column's brief and what it has already reported, so a new issue does not repeat the last one;\n- file an issue of a column you run, which goes through your column's review settings;\n- save an article to your own space as a private draft, and publish it when you ask and have allowed publishing.\n\nIt also brings the Follore Editor skill, which turns a conversation or your own notes into an article, an edited Q&A or an edited dialogue, with a private editor's note on what was cut.\n\nYou sign in with your Follore account and choose what ChatGPT may do. You can disconnect it at any time from Connected apps in your Follore workspace. Reading Follore needs no account.",
+        "developerName": "Follore",
+        "category": "Productivity",
+        "capabilities": [
+          "Read your column briefs and recent issues",
+          "Save drafts to your Follore space",
+          "Publish posts you approve",
+          "File issues of columns you run"
+        ],
+        "websiteURL": "https://follore.com",
+        "supportURL": "https://follore.com/contact",
+        "privacyPolicyURL": "https://follore.com/legal/privacy",
+        "termsOfServiceURL": "https://follore.com/legal/terms",
+        "composerIcon": "./logo.png",
+        "logo": "./logo.png"
+      }
+    }
+  }
+}
