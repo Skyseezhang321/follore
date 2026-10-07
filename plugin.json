@@ -31,6 +31,60 @@
         "termsOfServiceURL": "https://follore.com/legal/terms",
         "composerIcon": "./logo.png",
         "logo": "./logo.png"
+      },
+      "review": {
+        "test_cases": {
+          "positive": [
+            {
+              "description": "See what the connection may do and which columns the account runs. Read-only; nothing is changed.",
+              "prompt": "What can you do with my Follore account? Which columns do I run?",
+              "tools_triggered": "identity",
+              "expected_behavior": "Lists the permissions granted when the account was connected and the columns the account runs, each by name. Changes nothing."
+            },
+            {
+              "description": "Find the personal space that articles are published to.",
+              "prompt": "Where would an article of mine be published on Follore?",
+              "tools_triggered": "space",
+              "expected_behavior": "Returns the address of the account's public space."
+            },
+            {
+              "description": "Save notes as a private draft. A draft is not public until the person asks for it to be published.",
+              "prompt": "Save these notes as a draft article on Follore, titled \"Notes on small teams\": Small teams decide faster because fewer people have to agree. They also lose less to handoffs. The cost is that one absence is felt by everyone.",
+              "tools_triggered": "identity, create_post",
+              "expected_behavior": "Saves the article as a private draft and replies with the owner's own link to it. There is no public URL, and the reply says it is a draft."
+            },
+            {
+              "description": "Publish the draft saved in the previous case. Publishing makes it public and notifies subscribers, so the connection needs the publishing permission.",
+              "prompt": "Publish that draft.",
+              "tools_triggered": "publish_post",
+              "expected_behavior": "The post becomes public and the reply carries its public URL. If the connection was made without the publishing permission, the reply names that permission and where to enable it, and nothing is published."
+            },
+            {
+              "description": "File an issue of the account's column. The column's own review settings decide what happens to it. Before writing, the assistant reads what the column already reported and the standard it is judged against.",
+              "prompt": "File an issue of my column with the title \"Weekly update\" and this content: Three things happened this week. First, the reading list was reorganised by topic. Second, two archive pages were fixed. Third, the next issue will cover reader questions.",
+              "tools_triggered": "identity, column_brief, recent_items, submit_issue",
+              "expected_behavior": "Finds the account's column by name, reads its brief and its recent issues, then files the issue and reports that it was received. It does not create a post in the personal space."
+            }
+          ],
+          "negative": [
+            {
+              "description": "A column the account does not run. Nothing should be filed anywhere, and nothing should be written to the personal space instead. The assistant should list the columns the account does run and ask which one is meant.",
+              "prompt": "File an issue of my column \"Moon Gardening Weekly\" with the title \"Frost dates\" and a short note about when to plant."
+            },
+            {
+              "description": "A post that is not in the signed-in account's own space. Publishing must be refused, and the assistant should report the refusal instead of saying the post was published.",
+              "prompt": "Publish the post with id post_00000000000000000000000000000000 right now."
+            },
+            {
+              "description": "Another person's private drafts. No tool reaches another account's data, so the assistant should decline and explain that it only works with the signed-in account's own space and columns.",
+              "prompt": "Show me the private drafts of the other writers on Follore."
+            }
+          ]
+        },
+        "commerce": false
+      },
+      "publication": {
+        "release_notes": "Initial release. Connects ChatGPT to a Follore account through sign-in, with seven tools (identity, space, column_brief, recent_items, submit_issue, create_post, publish_post) and the Follore Editor skill."
       }
     }
   }
