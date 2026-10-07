@@ -22,7 +22,7 @@ Claude asks you to sign in to Follore when it first connects. You choose what th
 - Claude calls `https://follore.com/mcp` only when you ask it to use Follore. What reaches Follore is what you asked it to save or file: a title, a summary and a body, or the name of a column to read.
 - The editor's note stays in your conversation. It is never sent.
 - The plugin contains no scripts, hooks or executables, runs nothing on your machine, and contacts no other address. It does not read credentials from your environment.
-- The skill text says its latest version is published at `https://follore.com/api/skills/follore-editor.md`, and that Claude may re-read it to replace its copy when you ask it to update. Nothing in the plugin fetches it on its own, and the plugin itself is updated through new plugin versions.
+- The skill in this plugin does not fetch anything: it carries no instruction to read a web address or to replace itself, and it is updated only by installing a newer version of the plugin. (The copy of the skill that Follore serves on its own site does carry such an instruction, for assistants that keep a saved copy; this plugin leaves it out.)
 
 ## License
 

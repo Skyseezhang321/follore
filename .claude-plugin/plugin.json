@@ -1,7 +1,7 @@
 {
   "name": "follore",
   "displayName": "Follore",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Write for Follore from Claude: turn a chat or your notes into an article, save drafts to your own space, publish when you say so, and file issues of the columns you run.",
   "author": {
     "name": "Follore",
