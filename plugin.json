@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "follore",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Write for Follore from ChatGPT: save and publish posts in your own space, and file issues of the columns you run.",
   "author": {
     "name": "Follore",

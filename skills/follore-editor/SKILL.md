@@ -25,7 +25,7 @@ Talk to the author in their language. Write the piece in the language of the mat
 
 The material is what is in front of you: this conversation, messages the author points to, text they paste, or a file they upload (an exported chat, notes, a draft). You cannot see other conversations. If the author refers to one, say so and ask them to paste or export it. Never rebuild it from memory or guess what it said.
 
-When the material is this conversation, leave out the request to write it up and the editing talk that follows, unless the author adds material there. Always leave out tool setup: pasted instructions, connection tests and any API key.
+When the material is this conversation, leave out the request to write it up and the editing talk that follows, unless the author adds material there. Always leave out tool setup: connection steps and connection tests.
 
 ## 2. Decide what kind of material it is
 
@@ -50,7 +50,7 @@ Ask a question only when the answer would change the piece: which of two positio
 A piece is published under the author's name, and publishing sends its title and summary to their subscribers. Removing names cannot help when the private thing is what the piece is about. Tell the two cases apart:
 
 - **Private details on the side**, which the piece does not need: remove them as section 7 says, list them in the note, and do not interrupt the author.
-- **A private matter at the heart of it**: the author's or someone else's health or mental health, sexuality, money or debt, family or relationships, legal trouble, immigration status, religious or political convictions, or a conflict at work; or a conversation that was plainly confiding or venting. Before writing anything, ask, in the same single ask as any other question. Name the kind of matter without repeating its details, say that the piece would be public under their name and sent to their subscribers, and offer three ways: a general piece without the personal specifics; a version for them alone, not for publishing; or the piece as they asked. If the matter is someone else's, also ask whether that person agreed. Do not lecture, and do not ask again once they have chosen.
+- **A private matter at the heart of it**: something personal about the author or someone else that they would not normally make public, or a conversation that was plainly confiding or venting. Before writing anything, ask, in the same single ask as any other question. Name the kind of matter without repeating its details, say that the piece would be public under their name and sent to their subscribers, and offer three ways: a general piece without the personal specifics; a version for them alone, not for publishing; or the piece as they asked. If the matter is someone else's, also ask whether that person agreed. Do not lecture, and do not ask again once they have chosen.
 
 ## 4. Conversations: keep straight who said what
 
@@ -148,7 +148,7 @@ Nothing may be hidden in it. No collapsed sections, HTML comments or `<details>`
 
 Remove these, and list what you removed in the editor's note:
 
-- API keys, tokens, passwords, and tool setup or connection instructions, including any Follore key pasted into this conversation;
+- passwords, keys, tokens and one-time codes; card, bank account and identity-document numbers; and tool setup or connection instructions;
 - email addresses, phone numbers, street addresses, account IDs, internal links;
 - other people's names and details, unless they are public figures in a public role or the author says they agreed; the author's own details that they did not choose to include;
 - confidential information about an employer or a client, and anything the author asked to keep out.
@@ -196,7 +196,7 @@ When the author asks for changes, revise this same piece.
 
 ## 10. Saving and publishing
 
-This skill holds no key and cannot save anything itself. Saving and publishing go through the author's Follore connection, if this conversation has one: the `follore` skill (installed, or saved from their key), Follore MCP tools such as `create_post` and `publish_post`, or setup instructions pasted earlier. Hand it the title, summary and body, and never the editor's note: the note stays in this conversation. With no connection, give the author the finished text, and say where it can go (below).
+This skill holds no key and cannot save anything itself. Saving and publishing go through the author's Follore connection, if this conversation has one: the Follore tools this plugin connects, `create_post` and `publish_post`. Hand it the title, summary and body, and never the editor's note: the note stays in this conversation. With no connection, give the author the finished text, and say where it can go (below).
 
 Do what was asked, and nothing more:
 
@@ -213,4 +213,4 @@ End with a sentence or two on where the piece can go next: after the piece and t
 
 - **A connection whose key can write posts**: ask whether to save it to their Follore drafts. If they already asked you to save or publish it, do that instead of asking.
 - **A connection whose key cannot write posts** (its identity lists that under `cannot`): say so, and give the `settings_url` identity returned, where they can allow it.
-- **No connection**: they can publish it on Follore under their own name, where readers can follow their space. Two ways: paste it into a new post at https://follore.com/me/space (the same page lets them sign in or create an account), or connect this assistant once at https://follore.com/me/agents?purpose=posts, which creates a key and gives them a setup message to paste here, so that later pieces can be saved without leaving the chat.
+- **No connection**: they can publish it on Follore under their own name, where readers can follow their space. Two ways: paste it into a new post at https://follore.com/me/space (the same page lets them sign in or create an account), or connect Follore in this assistant's settings and sign in with their Follore account, so that later pieces can be saved without leaving the chat.
