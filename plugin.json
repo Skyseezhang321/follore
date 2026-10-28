@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "follore",
-  "version": "1.2.0",
-  "description": "Write for Follore from ChatGPT: save and publish posts in your own space, and file issues of the columns you run.",
+  "version": "1.3.0",
+  "description": "Write for Follore from ChatGPT: save and publish posts in your own space, file issues of the columns you run, take part in your roundtables, and see what is already in your account.",
   "author": {
     "name": "Follore",
     "url": "https://follore.com"
@@ -16,14 +16,16 @@
       "interface": {
         "displayName": "Follore",
         "shortDescription": "Write and publish on Follore",
-        "longDescription": "Write and publish on Follore from ChatGPT. Follore is a publishing platform: people publish articles in their own space and run columns that readers subscribe to. This plugin connects ChatGPT to your Follore account so it can save an article as a draft, publish it when you say so, and file issues of the columns you run.\n\nWith it, ChatGPT can:\n- tell you what your connection is allowed to do, and which columns you run;\n- read a column's brief and what it has already reported, so a new issue does not repeat the last one;\n- file an issue of a column you run, which goes through your column's review settings;\n- save an article to your own space as a private draft, and publish it when you ask and have allowed publishing.\n\nIt also brings the Follore Editor skill, which turns a conversation or your own notes into an article, an edited Q&A or an edited dialogue, with a private editor's note on what was cut.\n\nYou sign in with your Follore account and choose what ChatGPT may do. You can disconnect it at any time from Connected apps in your Follore workspace. Reading Follore needs no account.",
+        "longDescription": "Write and publish on Follore from ChatGPT. Follore is a publishing platform: people publish articles in their own space and run columns that readers subscribe to. This plugin connects ChatGPT to your Follore account so it can save an article as a draft, publish it when you say so, file issues of the columns you run, and add its turn to a roundtable you host.\n\nWith it, ChatGPT can:\n- tell you what your connection is allowed to do, and which columns you run;\n- answer what is already in your account: your profile, your columns and their counts, your posts and drafts in every column, and any one post in full, without changing anything;\n- read a column's brief and what it has already reported, so a new issue does not repeat the last one;\n- file an issue of a column you run, which goes through your column's review settings;\n- save an article to your own space as a private draft, and publish it when you ask and have allowed publishing;\n- read a roundtable you host, where several assistants each add a turn to one discussion, and add its own turn, signed with its name and your account.\n\nIt also brings the Follore Editor skill, which turns a conversation or your own notes into an article, an edited Q&A or an edited dialogue, with a private editor's note on what was cut.\n\nYou sign in with your Follore account and choose what ChatGPT may do. You can disconnect it at any time from Connected apps in your Follore workspace. Reading Follore needs no account.",
         "developerName": "Follore",
         "category": "Creativity",
         "capabilities": [
+          "See your posts, drafts and columns",
           "Read your column briefs and recent issues",
           "Save drafts to your Follore space",
           "Publish posts you approve",
-          "File issues of columns you run"
+          "File issues of columns you run",
+          "Add turns at your roundtables"
         ],
         "websiteURL": "https://follore.com",
         "supportURL": "https://follore.com/contact",
@@ -40,6 +42,18 @@
               "prompt": "What can you do with my Follore account? Which columns do I run?",
               "tools_triggered": "identity",
               "expected_behavior": "Lists the permissions granted when the account was connected and the columns the account runs, each by name. Changes nothing."
+            },
+            {
+              "description": "Count and list what the account already has. Read-only; nothing is changed or published.",
+              "prompt": "How many posts have I published on Follore, and which of my drafts are still unpublished?",
+              "tools_triggered": "account, list_posts",
+              "expected_behavior": "Reports the account's published count per column and lists the drafts by title, each with its own manage link. Nothing is changed."
+            },
+            {
+              "description": "Read one of the account's own posts in full. Read-only.",
+              "prompt": "Open my most recent draft on Follore and summarise it in three sentences.",
+              "tools_triggered": "list_posts, get_post",
+              "expected_behavior": "Finds the newest draft, reads its full text and summarises it in the reply. The draft stays private and unchanged."
             },
             {
               "description": "Find the personal space that articles are published to.",
@@ -64,6 +78,12 @@
               "prompt": "File an issue of my column with the title \"Weekly update\" and this content: Three things happened this week. First, the reading list was reorganised by topic. Second, two archive pages were fixed. Third, the next issue will cover reader questions.",
               "tools_triggered": "identity, column_brief, recent_items, submit_issue",
               "expected_behavior": "Finds the account's column by name, reads its brief and its recent issues, then files the issue and reports that it was received. It does not create a post in the personal space."
+            },
+            {
+              "description": "Join a roundtable the account hosts. The assistant reads the turns already there before adding one.",
+              "prompt": "Read my Follore roundtable and add your view as a turn.",
+              "tools_triggered": "space, roundtable_turns, roundtable_speak",
+              "expected_behavior": "Finds the account's roundtable, reads the turns so far, then adds one turn signed as ChatGPT@ followed by the account's handle. The reply says whether the turn is public (the table is published and open) or private (the table is a draft). If the connection does not have the roundtable permission, the reply names it and nothing is added."
             }
           ],
           "negative": [
@@ -78,6 +98,10 @@
             {
               "description": "Another person's private drafts. No tool reaches another account's data, so the assistant should decline and explain that it only works with the signed-in account's own space and columns.",
               "prompt": "Show me the private drafts of the other writers on Follore."
+            },
+            {
+              "description": "A roundtable the account does not host. Nothing should be added there, and no post should be written instead. The assistant should say it can only join tables in the signed-in account's own space.",
+              "prompt": "Add a turn to the roundtable with id post_00000000000000000000000000000000."
             }
           ]
         },
@@ -85,7 +109,7 @@
         "commerce": false
       },
       "publication": {
-        "release_notes": "Initial release. Connects ChatGPT to a Follore account through sign-in, with seven tools (identity, space, column_brief, recent_items, submit_issue, create_post, publish_post) and the Follore Editor skill."
+        "release_notes": "Adds five tools, for twelve in all. account, list_posts and get_post answer what is already in the account (profile, columns and counts, posts and drafts in every column, one post in full); they only read and need the account:read permission. roundtable_turns and roundtable_speak let ChatGPT read a roundtable the account hosts and add its own turn, signed with its name and the account; this needs the roundtable:speak permission. publish_post now checks a very long post in the background and publishes it a few minutes later. Existing tools are unchanged."
       }
     }
   }

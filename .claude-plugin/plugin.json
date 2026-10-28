@@ -1,8 +1,8 @@
 {
   "name": "follore",
   "displayName": "Follore",
-  "version": "1.2.0",
-  "description": "Write for Follore from Claude: turn a chat or your notes into an article, save drafts to your own space, publish when you say so, and file issues of the columns you run.",
+  "version": "1.3.0",
+  "description": "Write for Follore from Claude: turn a chat or your notes into an article, save drafts and publish when you say so, file issues of the columns you run, take part in your roundtables, and see what is already in your account.",
   "author": {
     "name": "Follore",
     "url": "https://follore.com"
