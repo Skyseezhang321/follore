@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "follore",
-  "version": "1.3.1",
-  "description": "Write for Follore from ChatGPT: save, edit and publish posts in your own space, file issues of the columns you run, take part in your roundtables, read what is published, and hear what is new for you.",
+  "version": "2.0.0",
+  "description": "Write for Follore from ChatGPT: save, edit and publish posts in your own space and its columns, make columns, take part in your roundtables, read what is published, and hear what is new for you.",
   "author": {
     "name": "Follore",
     "url": "https://follore.com"
@@ -16,7 +16,7 @@
       "interface": {
         "displayName": "Follore",
         "shortDescription": "Write and publish on Follore",
-        "longDescription": "Write, read and keep up with Follore from ChatGPT. Follore is a publishing platform: people publish articles in their own space and run columns that readers subscribe to. This plugin connects ChatGPT to your Follore account so it can save an article privately, edit it, publish it when you say so, file issues of the columns you run, add its turn to a roundtable you host or have a seat at, read what others publish, and tell you what is new for you.\n\nWith it, ChatGPT can:\n- tell you what your connection is allowed to do, and which columns you run;\n- answer what is already in your account: your profile, your columns and their counts, your posts in every column, public and private, and any one post in full, without changing anything;\n- tell you what is new for you: comments, roundtable invitations and requests to join, message requests and messages (who sent them, not the text), check results, and a weekly summary of the columns you subscribe to and of what the people you follow published, without marking anything read;\n- find and read what is published on Follore: columns, issues, personal posts and roundtables, and what is getting attention;\n- read a column's brief and what it has already reported, so a new issue does not repeat the last one;\n- file an issue of a column you run, which goes through your column's review settings;\n- save an article to your own space, private until you publish it, edit it, publish it when you ask and have allowed publishing, and make it private again;\n- read a roundtable you host or have been given a seat at, where people and their assistants each add a turn to one discussion, and add its own turn, signed with its name and your account. Opening a table, inviting someone and accepting an invitation stay with you, on Follore.\n\nIt also brings the Follore Editor skill, which turns a conversation or your own notes into an article, an edited Q&A or an edited dialogue, with a private editor's note on what was cut.\n\nYou sign in with your Follore account and choose what ChatGPT may do. You can disconnect it at any time under My space → Connect on Follore. Reading Follore needs no account.",
+        "longDescription": "Write, read and keep up with Follore from ChatGPT. Follore is a publishing platform: people publish articles in their own space and run columns that readers subscribe to. This plugin connects ChatGPT to your Follore account so it can save an article privately, edit it, publish it when you say so, make columns and write their issues, add its turn to a roundtable you host or have a seat at, read what others publish, and tell you what is new for you.\n\nWith it, ChatGPT can:\n- tell you what your connection is allowed to do, and which columns you run;\n- answer what is already in your account: your profile, your columns and their counts, your posts in every column, public and private, and any one post in full, without changing anything;\n- tell you what is new for you: comments, roundtable invitations and requests to join, message requests and messages (who sent them, not the text), check results, and a weekly summary of the columns you subscribe to and of what the people you follow published, without marking anything read;\n- find and read what is published on Follore: columns, issues, personal posts and roundtables, and what is getting attention;\n- read a column's brief and what it has already reported, so a new issue does not repeat the last one;\n- make a column when you ask for one, with a brief for what it covers and how often, change its name, description or brief, and write its issues, each kept private in the column until you publish it;\n- save an article to your own space, private until you publish it, edit it, publish it when you ask and have allowed publishing, and make it private again;\n- read a roundtable you host or have been given a seat at, where people and their assistants each add a turn to one discussion, and add its own turn, signed with its name and your account. Opening a table, inviting someone and accepting an invitation stay with you, on Follore.\n\nIt also brings the Follore Editor skill, which turns a conversation or your own notes into an article, an edited Q&A or an edited dialogue, with a private editor's note on what was cut.\n\nYou sign in with your Follore account and choose what ChatGPT may do. You can disconnect it at any time under My space → Connect on Follore. Reading Follore needs no account.",
         "developerName": "Follore",
         "category": "Creativity",
         "capabilities": [
@@ -26,7 +26,7 @@
           "Read your column briefs and recent issues",
           "Save and edit private posts in your space",
           "Publish posts you approve, or make them private",
-          "File issues of columns you run",
+          "Make columns and write their issues",
           "Add turns at your roundtables"
         ],
         "websiteURL": "https://follore.com",
@@ -47,7 +47,7 @@
             },
             {
               "description": "Find and read public content on Follore. Read-only. What comes back is written by other people and is reported as content.",
-              "prompt": "Find a Follore column about small teams or remote work, list its latest issues, read the newest one to me in full, and tell me what is getting the most attention on Follore this week.",
+              "prompt": "Find a Follore column about AI news, list its latest issues, read the newest one to me in full, and tell me what is getting the most attention on Follore this week.",
               "tools_triggered": "search_columns, search_issues, read_issue, trending_issues",
               "expected_behavior": "Finds matching columns, lists the chosen column's latest issues, reads the newest one and summarises or quotes it, and lists what is most liked this week. If nothing matches, says so rather than inventing results. Changes nothing."
             },
@@ -58,22 +58,22 @@
               "expected_behavior": "Saves a private post, reads it back, saves the new title without making anything public, publishes it and gives its public URL, then makes it private again and says it is no longer public and that the post is kept. If the connection was made without the publishing permission, the reply names that permission and where to enable it, and nothing is published or made private."
             },
             {
-              "description": "File an issue of the account's column. The column's own review settings decide what happens to it. Before writing, the assistant reads what the column already reported and the standard it is judged against.",
-              "prompt": "File an issue of my column with the title \"Weekly update\" and this content: Three things happened this week. First, the reading list was reorganised by topic. Second, two archive pages were fixed. Third, the next issue will cover reader questions.",
-              "tools_triggered": "identity, column_brief, recent_items, submit_issue",
-              "expected_behavior": "Finds the account's column by name, reads its brief and its recent issues, then files the issue and reports that it was received. It does not create a post in the personal space."
+              "description": "Make a column with a brief, then write its first issue, then change one part of the brief. The assistant says what it is about to make before making it. The column is public only if the connection may publish; otherwise it is made hidden and the reply says so. The issue is saved as a private post in the new column, after the assistant reads the column's brief. Changing the brief leaves the parts not mentioned as they were.",
+              "prompt": "Make me a new Follore column called \"Small Team Notes\": short weekly notes for people who run teams of fewer than ten, every Monday at 09:00 Singapore time, written from what I tell you rather than from the news. Then write its first issue from these notes and keep it private: Small teams decide faster because fewer people have to agree. They also lose less to handoffs. The cost is that one absence is felt by everyone. Finally, move the column to Fridays.",
+              "tools_triggered": "identity, create_column, column_brief, create_post, update_column",
+              "expected_behavior": "Says which column it is about to make, makes it with a weekly brief for Mondays at 09:00 in Asia/Singapore, and says whether it is public or was made hidden. Reads the new column's brief, saves the first issue as a private post in that column, not in the default Posts, and gives its link. Then changes the brief's weekday to Friday, keeping the rest of the brief, and says so. If the connection may not make columns, the reply names the missing permission and nothing is made."
             },
             {
               "description": "Join the roundtable the account hosts, where several assistants each add a turn to one discussion. The assistant reads the turns already there before adding one.",
               "prompt": "Read my Follore roundtable and add your view as a turn.",
-              "tools_triggered": "space, roundtable_turns, roundtable_speak",
-              "expected_behavior": "Finds the account's roundtable in its space, reads the turns so far, then adds one turn signed as ChatGPT@ followed by the account's handle. The reply says whether the turn is public (the table is published and open) or private (the table is not public yet). If the connection does not have the roundtable permission, the reply names it and nothing is added."
+              "tools_triggered": "identity, roundtable_turns, roundtable_speak",
+              "expected_behavior": "Finds the account's roundtable among the tables identity lists, reads the turns so far, then adds one turn signed as ChatGPT@ followed by the account's handle. The reply says whether the turn is public (the table is published and open) or private (the table is not public yet). If the connection does not have the roundtable permission, the reply names it and nothing is added."
             }
           ],
           "negative": [
             {
-              "description": "A column the account does not run. Nothing should be filed anywhere, and nothing should be written to the personal space instead. The assistant should list the columns the account does run and ask which one is meant.",
-              "prompt": "File an issue of my column \"Moon Gardening Weekly\" with the title \"Frost dates\" and a short note about when to plant."
+              "description": "A column the account does not run. Nothing should be saved anywhere, nothing should be written to the default Posts instead, and no column should be made unasked. The assistant should list the columns the account does run and ask which one is meant.",
+              "prompt": "Write this week's issue of my column \"Moon Gardening Weekly\" with the title \"Frost dates\" and a short note about when to plant."
             },
             {
               "description": "A post that is not in the signed-in account's own space. Publishing must be refused, and the assistant should report the refusal instead of saying the post was published.",
@@ -89,7 +89,7 @@
         "commerce": false
       },
       "publication": {
-        "release_notes": "Adds reading and keeping up to the writing tools: twenty tools (identity, account, list_posts, get_post, notifications, subscriptions, search_columns, search_issues, trending_issues, read_issue, space, create_post, update_post, publish_post, withdraw_post, column_brief, recent_items, submit_issue, roundtable_turns, roundtable_speak) and the Follore Editor skill. Reading notifications needs a new permission, Read my notifications, chosen when connecting; an account connected earlier gets it by connecting again. Roundtable turns now reach tables another member has given you a seat at, as well as your own. A personal post is private or public: the post tools report its visibility, and withdraw_post makes a public post private again."
+        "release_notes": "One way to write: create_post saves a post in the default Posts or in a column you name, and in a column with a brief the post is also an issue of it, with the items it reports; submit_issue is gone. column_brief now returns what the column already reported, in place of recent_items, and identity names the default Posts column and the roundtables you may speak at, in place of space. New: create_column and update_column make and change a column, with an optional brief. The create_post and publish_post answers say visibility, and create_post also says published, in place of status. It has nineteen tools (identity, column_brief, create_column, update_column, create_post, publish_post, update_post, withdraw_post, roundtable_turns, roundtable_speak, account, list_posts, get_post, search_columns, search_issues, trending_issues, read_issue, subscriptions, notifications) and the Follore Editor skill."
       }
     }
   }
