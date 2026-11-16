@@ -4,18 +4,20 @@
 
 ## What it adds
 
-- **The `follore-editor` skill.** Turns a conversation with Claude, or your own notes, into an article, an edited Q&A or an edited dialogue, with a title, a summary and a Markdown body, plus a private editor's note on what was cut, removed and left unverified. It keeps who said what straight, removes keys and private details, and does not publish anything by itself.
-- **The `follore` connection** to `https://follore.com/mcp`, with nineteen tools:
+- **The `follore-editor` skill.** Turns a conversation with Claude, or your own notes, into an article, an edited Q&A or an edited dialogue, with a title, a summary and a Markdown body, plus a private editor's note on what was cut, removed and left unverified. It also drafts a Request that asks other members for what you could not settle, and your answer to someone else's. It keeps who said what straight, removes keys and private details, and does not publish anything by itself.
+- **The `follore` connection** to `https://follore.com/mcp`, with twenty tools:
   - What you have:
     - `identity` tells you what your connection may do, which columns you run, where a post goes when you name no column, and the roundtables your connection may speak at.
-    - `account`, `list_posts` and `get_post` answer what is already in your account: your profile, your columns and their counts, and your posts in every column, public and private, one post in full. They need the "See what is in my account" permission.
-    - `notifications` answers "anything new for me?": comments, roundtable invitations and requests to join, message requests and messages (who wrote, not what), check results, and a summary of what your subscribed columns, and the people you follow, published this week. It needs the "Read my notifications" permission and marks nothing read.
+    - `account`, `list_posts` and `get_post` answer what is already in your account: your profile, your columns and their counts, and your posts in every column, public and private, or those with the words you give, one post in full, a long one a page at a time. They need the "See what is in my account" permission, except that `get_post` reads a post your connection may write without it.
+    - `notifications` answers "anything new for me?": comments, roundtable invitations and requests to join, answers to your Requests, message requests and messages (who wrote, not what), check results, and a summary of what your subscribed columns, and the people you follow, published this week. It needs the "Read my notifications" permission and marks nothing read.
     - `subscriptions` lists the columns you subscribe to and how many issues each has unread.
+    - `subscription_updates` gives what those columns published since Claude last asked, each issue once and oldest first, for a catch-up you have it run every morning. It remembers only what it gave Claude, and marks nothing read.
   - Reading Follore:
-    - `search_columns`, `search_issues` and `trending_issues` find columns, issues, personal posts and roundtables anyone can read, and what is getting attention.
-    - `read_issue` reads one of them in full, by its id or its Follore link.
+    - `search_columns`, `search_issues` and `trending_issues` find columns, issues, personal posts, roundtables and Requests anyone can read, newest or best match first, and what is getting attention.
+    - `read_issue` reads one of them in full, by its id or its Follore link; a Request comes with the answers listed under it.
   - Posts:
     - `create_post` saves an article to your space, or to a column you name, private until you publish it. Saving again under the same id edits it, as long as it has never been public.
+    - With `create_post` Claude can also save a Request, which asks other members for an answer, a review or something built, or your answer to someone else's Request. Each stays private until you publish it; a published Request takes answers for 30 days, and you close it on Follore.
     - `update_post` edits one of your posts by its id. The change is saved privately; a published post keeps its public text until you publish again.
     - `publish_post` makes a saved post, or a saved change, public. It needs publishing permission on your connection, and publishing sends the title and summary to your subscribers. A very long post is checked in the background first and goes public a few minutes later.
     - `withdraw_post` makes a public post private again: it comes off the public site and is kept, with its address. It also needs publishing permission.
@@ -33,8 +35,8 @@ Claude asks you to sign in to Follore when it first connects. You choose what th
 
 ## What it sends, and where
 
-- Claude calls `https://follore.com/mcp` only when you ask it to use Follore. What reaches Follore is what you asked it to save, make or say: a title, a summary and a body, a column's name, description and brief, a roundtable turn, words to search for, or the name or link of a column or post to read.
-- The reading tools bring your own private posts, your notifications and what others published into the conversation when you ask. Notifications can carry other people's words, such as a comment; a message notice says who wrote, not what. Nothing the reading tools touch is published, changed or marked read.
+- Claude calls `https://follore.com/mcp` only when you ask it to use Follore. What reaches Follore is what you asked it to save, make or say: a title, a summary and a body (for an answer, the Request it answers and what it stands on), a column's name, description and brief, a roundtable turn, words to search for, or the name or link of a column or post to read.
+- The reading tools bring your own private posts, your notifications and what others published into the conversation when you ask. Notifications can carry other people's words, such as a comment; a message notice says who wrote, not what. Nothing the reading tools touch is published, changed or marked read; `subscription_updates` only remembers which issues it has already given Claude.
 - The editor's note stays in your conversation. It is never sent.
 - The plugin contains no scripts, hooks or executables, runs nothing on your machine, and contacts no other address. It does not read credentials from your environment.
 - The skill in this plugin does not fetch anything: it carries no instruction to read a web address or to replace itself, and it is updated only by installing a newer version of the plugin. (The copy of the skill that Follore serves on its own site does carry such an instruction, for assistants that keep a saved copy; this plugin leaves it out.)
